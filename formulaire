@@ -1,0 +1,99 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Formulaire de Consommation d'Eau</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            margin: 20px;
+            background-color: #f4f4f4;
+        }
+        .container {
+            background-color: white;
+            padding: 20px;
+            border-radius: 8px;
+            box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+            width: 350px;
+            margin: auto;
+        }
+        input[type="text"], input[type="number"], input[type="date"], input[type="submit"] {
+            width: 100%;
+            padding: 10px;
+            margin: 10px 0;
+            border-radius: 5px;
+            border: 1px solid #ccc;
+        }
+        .alert {
+            background-color: #f44336;
+            color: white;
+            padding: 10px;
+            margin-top: 20px;
+            border-radius: 4px;
+            display: none;
+        }
+        .success {
+            background-color: #4CAF50;
+            color: white;
+            padding: 10px;
+            margin-top: 20px;
+            border-radius: 4px;
+            display: none;
+        }
+    </style>
+</head>
+<body>
+
+    <div class="container">
+        <h2>Formulaire de Consommation d'Eau</h2>
+        <form id="consommationForm">
+            <label for="nom">Nom du champ (par exemple, "Champ A") :</label>
+            <input type="text" id="nom" required placeholder="Nom du champ">
+
+            <label for="date">Date de consommation :</label>
+            <input type="date" id="date" required>
+
+            <label for="consommation">Consommation (en litres) :</label>
+            <input type="number" id="consommation" required placeholder="Quantité en litres" min="0">
+
+            <input type="submit" value="Soumettre">
+        </form>
+
+        <div id="success" class="success">Données enregistrées avec succès!</div>
+        <div id="alert" class="alert">Erreur : Veuillez vérifier vos entrées.</div>
+    </div>
+
+    <script>
+        document.getElementById('consommationForm').addEventListener('submit', function(event) {
+            event.preventDefault(); // Empêche l'envoi du formulaire
+
+            // Récupérer les valeurs des champs
+            const nom = document.getElementById('nom').value;
+            const date = document.getElementById('date').value;
+            const consommation = parseFloat(document.getElementById('consommation').value);
+
+            // Validation de la consommation
+            if (!nom || !date || isNaN(consommation) || consommation <= 0) {
+                // Si les données sont invalides, afficher un message d'erreur
+                document.getElementById('alert').style.display = 'block';
+                document.getElementById('success').style.display = 'none';
+            } else {
+                // Si les données sont valides, enregistrer (ici, on affiche simplement un message)
+                console.log("Données enregistrées:", { nom, date, consommation });
+
+                // Simuler un stockage des données (par exemple, les enregistrer dans une base de données)
+                // Cette partie serait effectuée côté serveur en utilisant une technologie comme PHP, Node.js, etc.
+
+                // Afficher un message de succès
+                document.getElementById('success').style.display = 'block';
+                document.getElementById('alert').style.display = 'none';
+
+                // Réinitialiser le formulaire
+                document.getElementById('consommationForm').reset();
+            }
+        });
+    </script>
+
+</body>
+</html>
